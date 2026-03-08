@@ -21,6 +21,8 @@ const gsapLib = window.gsap;
 const scrollTriggerLib = window.ScrollTrigger;
 const hasGsap = Boolean(gsapLib && scrollTriggerLib);
 
+document.body.classList.toggle("is-ios", isIOS);
+
 let introDismissed = false;
 let playHeroScene = () => {};
 let visualizerTweens = [];

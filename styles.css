@@ -2617,3 +2617,49 @@ body.music-on .visualizer span {
     transform: scale(1.08);
   }
 }
+
+body.is-ios .mini-card,
+body.is-ios .letter-shell,
+body.is-ios .promise-card,
+body.is-ios .gallery-note-card,
+body.is-ios .gallery-card,
+body.is-ios .letter,
+body.is-ios .music-card,
+body.is-ios .quote-card,
+body.is-ios .signature-card {
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+}
+
+body.is-ios .mini-card,
+body.is-ios .letter-shell,
+body.is-ios .promise-card,
+body.is-ios .gallery-note-card,
+body.is-ios .intro-card {
+  animation: none !important;
+}
+
+body.is-ios .gallery-note-card::before,
+body.is-ios .gallery-note-card::after,
+body.is-ios .quote-card::before,
+body.is-ios .quote-card::after,
+body.is-ios .letter::before,
+body.is-ios .letter::after,
+body.is-ios .promise-card::before,
+body.is-ios .intro-card::before,
+body.is-ios .intro-card::after {
+  animation: none !important;
+}
+
+body.is-ios .mini-card,
+body.is-ios .letter-shell,
+body.is-ios .promise-card,
+body.is-ios .gallery-note-card,
+body.is-ios .gallery-feature-frame,
+body.is-ios .gallery-side-shot,
+body.is-ios .signature-card,
+body.is-ios .letter {
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  contain: paint;
+}
