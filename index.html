@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#7f2439">
+  <title>Линара, с 8 Марта</title>
+  <meta
+    name="description"
+    content="Романтичное поздравление для Линары к 8 Марта."
+  >
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bad+Script&family=Cormorant+Garamond:wght@500;600;700&family=Manrope:wght@400;500;700&family=Marck+Script&display=swap"
+    rel="stylesheet"
+  >
+  <link rel="stylesheet" href="styles.css?v=20260308o">
+</head>
+<body>
+  <div class="intro" id="intro">
+    <div class="intro-card">
+      <p class="eyebrow">8 марта 2026</p>
+      <h1>Линара</h1>
+      <p class="intro-copy">
+        Я сделал это только для тебя, чтобы еще раз сказать, как сильно я тебя люблю.
+      </p>
+      <button class="button button-primary intro-button" id="startExperience" type="button">
+        Для тебя
+      </button>
+    </div>
+  </div>
+
+  <div class="bg-video-shell" aria-hidden="true">
+    <video
+      class="bg-video"
+      id="bgVideo"
+      autoplay
+      muted
+      loop
+      playsinline
+      preload="auto"
+      poster="background-video-poster.jpg"
+    ></video>
+    <div class="bg-video-overlay"></div>
+  </div>
+
+  <div class="backdrop">
+    <div class="backdrop-blob blob-left" aria-hidden="true"></div>
+    <div class="backdrop-blob blob-right" aria-hidden="true"></div>
+  </div>
+  <div class="sparkles sparkles-overlay" aria-hidden="true"></div>
+  <div class="petals petals-overlay" aria-hidden="true"></div>
+
+  <audio id="bgMusic" loop preload="metadata">
+    <source src="Мирас Жугунусов - Әндетемін.mp3" type="audio/mpeg">
+  </audio>
+
+  <main class="scene">
+    <section class="signature-card reveal is-visible" id="top">
+      <div class="signature-card__shine" aria-hidden="true"></div>
+      <div class="orbit orbit-one" aria-hidden="true"></div>
+      <div class="orbit orbit-two" aria-hidden="true"></div>
+      <div class="signature-layout">
+        <div class="signature-portrait-wrap">
+          <figure class="signature-portrait">
+            <img src="5.jpg" alt="Линара" loading="eager" fetchpriority="high" decoding="async">
+          </figure>
+          <figure class="signature-memory">
+            <img src="1.jpg" alt="Вы вдвоем" loading="eager" decoding="async">
+          </figure>
+        </div>
+
+        <div class="signature-card__content">
+          <p class="eyebrow">Самой любимой женщине</p>
+          <h1 class="signature-title"><span>Линара</span></h1>
+          <p class="signature-subtitle">
+            Моя самая нежная, красивая и родная
+          </p>
+          <div class="signature-poem">
+            <p>Ты мой самый красивый закат.</p>
+            <p>Ты мой самый тихий уют.</p>
+          </div>
+          <p class="signature-copy">
+            Все это про тебя. Про твою нежность, твой свет и то спокойное счастье,
+            которое приходит ко мне, когда ты рядом.
+          </p>
+
+          <div class="chip-row">
+            <span class="chip">С 8 Марта</span>
+            <span class="chip">Люблю тебя</span>
+            <span class="chip">Ты мой свет</span>
+          </div>
+
+          <div class="signature-line" aria-hidden="true">
+            <span></span>
+            <p>Ты мой самый красивый праздник</p>
+            <span></span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="dashboard">
+      <article class="mini-card quote-card reveal">
+        <h2>
+          С тобой любой день становится теплее, а любое молчание уютнее.
+        </h2>
+        <p class="quote-copy">
+          Ты делаешь мою жизнь красивой не громкими словами, а своим сердцем.
+        </p>
+        <p class="card-note">
+          И мне хочется, чтобы рядом со мной ты всегда чувствовала только
+          нежность, спокойствие и любовь.
+        </p>
+      </article>
+
+      <article class="mini-card music-card reveal">
+        <div class="music-card__head">
+          <h3>Мирас Жугунусов - Әндетемін</h3>
+          <div class="visualizer" aria-hidden="true">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+        </div>
+        <p class="music-copy">
+          Пусть эта песня просто звучит рядом, пока ты смотришь это признание.
+        </p>
+      </article>
+
+      <article id="gallery" class="mini-card gallery-card gallery-card-story reveal">
+        <div class="gallery-stage">
+          <section class="gallery-band gallery-band--top">
+            <figure class="gallery-side-shot gallery-side-shot--left">
+              <img src="2.jpg" alt="Еще одна совместная фотография" loading="lazy">
+            </figure>
+            <section class="gallery-note-card gallery-note-card--main">
+              <p class="eyebrow">Наши моменты</p>
+              <h3>Самые любимые кадры</h3>
+              <p class="gallery-copy">
+                Здесь живут наши теплые воспоминания, самые красивые кадры и то
+                счастье, которое я чувствую рядом с тобой.
+              </p>
+              <p class="gallery-whisper">Все самое красивое у меня связано с тобой.</p>
+            </section>
+            <figure class="gallery-side-shot gallery-side-shot--right">
+              <img src="4.jpg" alt="Портрет Линары" loading="lazy">
+            </figure>
+          </section>
+
+          <figure class="gallery-feature-frame">
+            <img src="6.jpg" alt="Вы вдвоем в свадебном одеянии" loading="lazy">
+            <figcaption>
+              <p>Тот самый свадебный кадр, который хочется хранить в сердце всю жизнь.</p>
+            </figcaption>
+          </figure>
+
+          <section class="gallery-band gallery-band--bottom">
+            <figure class="gallery-side-shot gallery-side-shot--left gallery-side-shot--alt">
+              <img src="3.jpg" alt="Еще один ваш общий момент" loading="lazy">
+            </figure>
+            <section class="gallery-note-card gallery-note-card--closing">
+              <p class="eyebrow">Навсегда</p>
+              <p class="gallery-note-copy">
+                Пусть эти фотографии всегда напоминают нам, как красиво нам быть рядом.
+              </p>
+              <p class="gallery-whisper gallery-whisper--small">И мне хочется проживать все это снова и снова.</p>
+            </section>
+            <figure class="gallery-side-shot gallery-side-shot--right gallery-side-shot--alt">
+              <img src="7.jpg" alt="Еще один портрет Линары" loading="lazy">
+            </figure>
+          </section>
+        </div>
+      </article>
+    </section>
+
+    <section id="letter" class="letter-shell reveal">
+      <div class="letter-header">
+        <div>
+          <h2>Все самое важное</h2>
+          <p class="letter-intro">Здесь все, что мне хочется сказать тебе от сердца.</p>
+        </div>
+      </div>
+
+      <article class="letter" id="love-letter" aria-hidden="false">
+        <div class="letter__body">
+          <p class="letter-lead">
+            Жаным, любимая, с 8 Марта тебя.
+          </p>
+          <p>
+            Спасибо тебе за твою нежность, за тепло, за заботу и за то чувство
+            дома, которое появляется рядом с тобой. Ты умеешь делать мою жизнь
+            красивее не чем-то громким, а своим присутствием, своим голосом и
+            своим сердцем.
+          </p>
+          <p>
+            Я люблю в тебе все: твою улыбку, твой характер, твой свет и то,
+            как спокойно мне рядом с тобой. Для меня ты самая красивая, самая
+            желанная, самая родная и самая любимая.
+          </p>
+          <p>
+            Мне хочется, чтобы ты как можно чаще улыбалась, чувствовала себя
+            любимой и ни на секунду не сомневалась, насколько ты для меня
+            важна.
+          </p>
+          <p class="letter-closing">
+            Я очень тебя люблю и хочу, чтобы ты чувствовала это каждый день, а
+            не только сегодня.
+          </p>
+          <p class="letter-signature">Всегда твой муж.</p>
+        </div>
+      </article>
+    </section>
+
+    <section class="promise-strip reveal">
+      <article class="promise-card">
+        <h2>
+          Я хочу быть тем человеком, рядом с которым тебе всегда спокойно,
+          легко, красиво и по-настоящему хорошо.
+        </h2>
+        <p class="promise-copy">Не только в праздник, а каждый день.</p>
+      </article>
+    </section>
+
+    <footer class="footer reveal">
+      <p>С любовью, твой муж.</p>
+    </footer>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/ScrollTrigger.min.js"></script>
+  <script src="script.js?v=20260308n"></script>
+</body>
+</html>
