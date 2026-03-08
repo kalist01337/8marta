@@ -10,7 +10,11 @@ const cardRainTargets = document.querySelectorAll(
   ".signature-card, .mini-card, .letter-shell, .promise-card"
 );
 const tiltCard = document.querySelector(".signature-card");
-const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+const isIOS =
+  /iPad|iPhone|iPod/.test(window.navigator.userAgent) ||
+  (window.navigator.platform === "MacIntel" && window.navigator.maxTouchPoints > 1);
+const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+const reducedMotion = prefersReducedMotion && !isIOS;
 const prefersFinePointer = window.matchMedia("(pointer: fine)").matches;
 const MUSIC_VOLUME = 0.22;
 const gsapLib = window.gsap;
@@ -227,7 +231,11 @@ function createBackgroundPetals() {
     return;
   }
 
-  const petalCount = window.matchMedia("(max-width: 720px)").matches ? 30 : 56;
+  const petalCount = window.matchMedia("(max-width: 720px)").matches
+    ? isIOS
+      ? 24
+      : 30
+    : 56;
   const petalStyles = [
     "petal--rose",
     "petal--blush",
@@ -422,8 +430,8 @@ function createSparkles() {
   }
 
   const mobile = window.matchMedia("(max-width: 720px)").matches;
-  const sparkleCount = mobile ? 16 : 26;
-  const extraHeartCount = mobile ? 8 : 14;
+  const sparkleCount = mobile ? (isIOS ? 12 : 16) : 26;
+  const extraHeartCount = mobile ? (isIOS ? 6 : 8) : 14;
   const sparkleTypes = [
     "sparkle--star",
     "sparkle--star",
@@ -1092,7 +1100,7 @@ function setupGsapAnimations() {
       desktop: "(min-width: 721px)",
     },
     (context) => {
-      const { reduceMotion, mobile } = context.conditions;
+      const { reduceMotion: mediaReducedMotion, mobile } = context.conditions;
       const revealStart = mobile ? "top 92%" : "top 84%";
       const enterDistance = mobile ? 24 : 36;
 
@@ -1118,7 +1126,7 @@ function setupGsapAnimations() {
         { autoAlpha: 1 }
       );
 
-      if (reduceMotion) {
+      if (mediaReducedMotion && !isIOS) {
         playHeroScene = () => {};
         if (intro && introDismissed) {
           hideIntroImmediately();
@@ -1131,17 +1139,25 @@ function setupGsapAnimations() {
       setupGalleryDepthMotion(mobile);
       const backgroundLoops = setupBackgroundBreathing(mobile);
 
-      gsapLib.set(".letter__body > *:not(.letter-signature)", {
-        autoAlpha: 0,
-        y: 18,
-        clipPath: "inset(0 0 100% 0)",
-        filter: "blur(8px)",
-      });
+      gsapLib.set(
+        ".letter__body > *:not(.letter-signature)",
+        isIOS
+          ? {
+              autoAlpha: 0,
+              y: 18,
+            }
+          : {
+              autoAlpha: 0,
+              y: 18,
+              clipPath: "inset(0 0 100% 0)",
+              filter: "blur(8px)",
+            }
+      );
       gsapLib.set(".letter-signature", {
         autoAlpha: 0,
         y: 12,
         scale: 0.96,
-        filter: "blur(4px)",
+        filter: isIOS ? "blur(0px)" : "blur(4px)",
       });
 
       const introTimeline = intro
@@ -1709,8 +1725,7 @@ function setupGsapAnimations() {
             .to(letterLines, {
               autoAlpha: 1,
               y: 0,
-              clipPath: "inset(0 0 0% 0)",
-              filter: "blur(0px)",
+              ...(isIOS ? {} : { clipPath: "inset(0 0 0% 0)", filter: "blur(0px)" }),
               stagger: 0.34,
               duration: 1.08,
               ease: "power2.out",
@@ -1719,7 +1734,7 @@ function setupGsapAnimations() {
               autoAlpha: 1,
               y: 0,
               scale: 1,
-              filter: "blur(0px)",
+              ...(isIOS ? {} : { filter: "blur(0px)" }),
               duration: 0.94,
               ease: "power2.out",
             }, ">-0.08");
