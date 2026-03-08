@@ -1134,6 +1134,27 @@ function setupGsapAnimations() {
         { autoAlpha: 1 }
       );
 
+      if (isIOS) {
+        gsapLib.set(
+          [
+            ".intro-card .eyebrow",
+            ".intro-card h1",
+            ".intro-copy",
+            ".intro-button",
+            ".gallery-copy",
+            ".gallery-whisper",
+            ".gallery-note-copy",
+            ".gallery-whisper--small",
+          ],
+          {
+            autoAlpha: 1,
+            y: 0,
+            x: 0,
+            clearProps: "opacity,visibility,transform",
+          }
+        );
+      }
+
       if (mediaReducedMotion && !isIOS) {
         playHeroScene = () => {};
         if (intro && introDismissed) {
@@ -1188,33 +1209,37 @@ function setupGsapAnimations() {
             scale: 0.975,
             duration: 1.5,
             ease: "power2.out",
-          }, 0.08)
-          .from(".intro-card .eyebrow", {
-            autoAlpha: 0,
-            y: -8,
-            duration: 0.74,
-            ease: "sine.out",
-          }, 0.24)
-          .from(".intro-card h1", {
-            autoAlpha: 0,
-            y: 14,
-            scale: 0.97,
-            duration: 0.96,
-            ease: "power2.out",
-          }, 0.34)
-          .from(".intro-copy", {
-            autoAlpha: 0,
-            y: 14,
-            duration: 0.88,
-            ease: "power2.out",
-          }, 0.48)
-          .from(".intro-button", {
-            autoAlpha: 0,
-            y: 12,
-            scale: 0.96,
-            duration: 0.82,
-            ease: "power2.out",
-          }, 0.62);
+          }, 0.08);
+
+        if (!isIOS) {
+          introTimeline
+            .from(".intro-card .eyebrow", {
+              autoAlpha: 0,
+              y: -8,
+              duration: 0.74,
+              ease: "sine.out",
+            }, 0.24)
+            .from(".intro-card h1", {
+              autoAlpha: 0,
+              y: 14,
+              scale: 0.97,
+              duration: 0.96,
+              ease: "power2.out",
+            }, 0.34)
+            .from(".intro-copy", {
+              autoAlpha: 0,
+              y: 14,
+              duration: 0.88,
+              ease: "power2.out",
+            }, 0.48)
+            .from(".intro-button", {
+              autoAlpha: 0,
+              y: 12,
+              scale: 0.96,
+              duration: 0.82,
+              ease: "power2.out",
+            }, 0.62);
+        }
       }
 
       const heroAmbientTweens = [
@@ -1585,13 +1610,6 @@ function setupGsapAnimations() {
               duration: 1.02,
               ease: "power2.out",
             }, 0.36)
-            .from(q(".gallery-copy, .gallery-band--top .gallery-whisper"), {
-              autoAlpha: 0,
-              y: 10,
-              stagger: 0.14,
-              duration: 0.82,
-              ease: "power2.out",
-            }, 0.5)
             .from(q(".gallery-feature-frame .motion-glow"), {
               autoAlpha: 0,
               scale: 0.84,
@@ -1653,14 +1671,25 @@ function setupGsapAnimations() {
               rotate: 10,
               duration: 0.98,
               ease: "power2.out",
-            }, 1.08)
-            .from(q(".gallery-note-copy, .gallery-whisper--small"), {
-              autoAlpha: 0,
-              y: 10,
-              stagger: 0.14,
-              duration: 0.82,
-              ease: "power2.out",
             }, 1.18);
+
+          if (!isIOS) {
+            timeline
+              .from(q(".gallery-copy, .gallery-band--top .gallery-whisper"), {
+                autoAlpha: 0,
+                y: 10,
+                stagger: 0.14,
+                duration: 0.82,
+                ease: "power2.out",
+              }, 0.5)
+              .from(q(".gallery-note-copy, .gallery-whisper--small"), {
+                autoAlpha: 0,
+                y: 10,
+                stagger: 0.14,
+                duration: 0.82,
+                ease: "power2.out",
+              }, 1.18);
+          }
         },
         { start: mobile ? "top 94%" : "top 82%", loops: galleryLoops }
       );
