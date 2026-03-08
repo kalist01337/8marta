@@ -329,7 +329,7 @@ function createBackgroundPetals() {
 }
 
 function createCardRain() {
-  if (cardRainTargets.length === 0 || reducedMotion) {
+  if (cardRainTargets.length === 0 || reducedMotion || isIOS) {
     return;
   }
 
@@ -606,7 +606,7 @@ function setupCardTilt() {
 }
 
 function createFloatTween(target, vars) {
-  if (!target) {
+  if (!target || isIOS) {
     return null;
   }
 
@@ -629,7 +629,7 @@ function createFloatTween(target, vars) {
 }
 
 function createGlowTween(target, vars = {}) {
-  if (!target) {
+  if (!target || isIOS) {
     return null;
   }
 
@@ -652,7 +652,7 @@ function createGlowTween(target, vars = {}) {
 }
 
 function createSweepTween(target, vars = {}) {
-  if (!target) {
+  if (!target || isIOS) {
     return null;
   }
 
@@ -707,7 +707,7 @@ function createSweepTween(target, vars = {}) {
 }
 
 function setupBackgroundBreathing(mobile) {
-  if (!hasGsap || reducedMotion) {
+  if (!hasGsap || reducedMotion || isIOS) {
     return [];
   }
 
@@ -767,7 +767,7 @@ function setupBackgroundBreathing(mobile) {
 }
 
 function setupHeroParallax(mobile) {
-  if (!hasGsap || reducedMotion) {
+  if (!hasGsap || reducedMotion || isIOS) {
     return;
   }
 
@@ -842,7 +842,7 @@ function setupHeroParallax(mobile) {
 }
 
 function setupPhotoScrollMotion(mobile) {
-  if (!hasGsap || reducedMotion) {
+  if (!hasGsap || reducedMotion || isIOS) {
     return;
   }
 
@@ -903,7 +903,7 @@ function setupPhotoScrollMotion(mobile) {
 }
 
 function setupGalleryDepthMotion(mobile) {
-  if (!hasGsap || reducedMotion) {
+  if (!hasGsap || reducedMotion || isIOS) {
     return;
   }
 

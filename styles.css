@@ -2629,6 +2629,7 @@ body.is-ios .quote-card,
 body.is-ios .signature-card {
   -webkit-backdrop-filter: none !important;
   backdrop-filter: none !important;
+  transition: none !important;
 }
 
 body.is-ios .mini-card,
@@ -2662,4 +2663,12 @@ body.is-ios .letter {
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
   contain: paint;
+}
+
+body.is-ios .motion-glow,
+body.is-ios .light-sweep,
+body.is-ios .signature-card__shine,
+body.is-ios .orbit,
+body.is-ios .card-rain {
+  display: none !important;
 }
