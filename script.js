@@ -1066,7 +1066,7 @@ function createScrollTimeline(target, buildTimeline, options = {}) {
 
   const timeline = gsapLib.timeline({
     paused: true,
-    defaults: { ease: "power3.out" },
+    defaults: { ease: "power3.out", immediateRender: false },
     onComplete: () => {
       (options.loops || []).filter(Boolean).forEach((tween) => tween.play());
     },
@@ -1074,12 +1074,20 @@ function createScrollTimeline(target, buildTimeline, options = {}) {
 
   buildTimeline(timeline);
 
-  scrollTriggerLib.create({
+  const trigger = scrollTriggerLib.create({
     trigger: target,
     start: options.start,
     once: true,
     onEnter: () => timeline.play(0),
   });
+
+  const initialThreshold = options.initialThreshold ?? 0.96;
+  const targetTop = target.getBoundingClientRect().top;
+
+  if (targetTop <= window.innerHeight * initialThreshold) {
+    timeline.play(0);
+    trigger.kill();
+  }
 
   return timeline;
 }
