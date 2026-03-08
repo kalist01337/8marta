@@ -1148,11 +1148,22 @@ function setupGsapAnimations() {
             ".gallery-whisper",
             ".gallery-note-copy",
             ".gallery-whisper--small",
+            ".quote-card .eyebrow",
+            ".quote-card h2",
+            ".quote-copy",
+            ".card-note",
+            ".music-card__head h3",
+            ".music-copy",
+            ".promise-card h2",
+            ".promise-copy",
+            ".footer p",
           ],
           {
             autoAlpha: 1,
             y: 0,
             x: 0,
+            scale: 1,
+            filter: "blur(0px)",
             clearProps: "opacity,visibility,transform",
           }
         );
@@ -1422,34 +1433,39 @@ function setupGsapAnimations() {
         }),
       ].filter(Boolean);
 
-      createScrollTimeline(
-        quoteCard,
-        (timeline) => {
-          const q = gsapLib.utils.selector(quoteCard);
-          timeline
-            .from(q(".motion-glow"), {
-              autoAlpha: 0,
-              scale: 0.84,
-              duration: 1,
-              ease: "sine.out",
-            }, 0.04)
-            .from(quoteCard, {
-              autoAlpha: 0,
-              y: enterDistance,
-              scale: 0.985,
-              duration: 1.28,
-              ease: "power2.out",
-            })
-            .from(q(".eyebrow"), { autoAlpha: 0, x: -10, duration: 0.72, ease: "sine.out" }, 0.18)
-            .from(q("h2"), { autoAlpha: 0, y: 12, scale: 0.985, duration: 0.92, ease: "power2.out" }, 0.32)
-            .from(
-              q(".quote-copy, .card-note"),
-              { autoAlpha: 0, y: 10, stagger: 0.16, duration: 0.84, ease: "power2.out" },
-              0.48
-            );
-        },
-        { start: revealStart, loops: quoteLoops }
-      );
+      if (isIOS) {
+        gsapLib.set(quoteCard, { autoAlpha: 1, y: 0, scale: 1, clearProps: "opacity,visibility,transform" });
+        quoteLoops.forEach((loop) => loop.play());
+      } else {
+        createScrollTimeline(
+          quoteCard,
+          (timeline) => {
+            const q = gsapLib.utils.selector(quoteCard);
+            timeline
+              .from(q(".motion-glow"), {
+                autoAlpha: 0,
+                scale: 0.84,
+                duration: 1,
+                ease: "sine.out",
+              }, 0.04)
+              .from(quoteCard, {
+                autoAlpha: 0,
+                y: enterDistance,
+                scale: 0.985,
+                duration: 1.28,
+                ease: "power2.out",
+              })
+              .from(q(".eyebrow"), { autoAlpha: 0, x: -10, duration: 0.72, ease: "sine.out" }, 0.18)
+              .from(q("h2"), { autoAlpha: 0, y: 12, scale: 0.985, duration: 0.92, ease: "power2.out" }, 0.32)
+              .from(
+                q(".quote-copy, .card-note"),
+                { autoAlpha: 0, y: 10, stagger: 0.16, duration: 0.84, ease: "power2.out" },
+                0.48
+              );
+          },
+          { start: revealStart, loops: quoteLoops }
+        );
+      }
 
       const musicLoops = [
         createGlowTween(musicCard?.querySelector(".motion-glow"), {
@@ -1466,42 +1482,51 @@ function setupGsapAnimations() {
         }),
       ].filter(Boolean);
 
-      createScrollTimeline(
-        musicCard,
-        (timeline) => {
-          const q = gsapLib.utils.selector(musicCard);
-          timeline
-            .from(q(".motion-glow"), {
-              autoAlpha: 0,
-              scale: 0.84,
-              duration: 0.94,
-              ease: "sine.out",
-            }, 0.04)
-            .from(musicCard, {
-              autoAlpha: 0,
-              y: enterDistance,
-              scale: 0.985,
-              duration: 1.26,
-              ease: "power2.out",
-            })
-            .from(q(".music-card__head h3"), {
-              autoAlpha: 0,
-              x: -10,
-              duration: 0.84,
-              ease: "power2.out",
-            }, 0.24)
-            .from(q(".visualizer span"), {
-              autoAlpha: 0,
-              scaleY: 0.4,
-              stagger: 0.06,
-              duration: 0.44,
-              transformOrigin: "50% 100%",
-              ease: "sine.out",
-            }, 0.34)
-            .from(q(".music-copy"), { autoAlpha: 0, y: 10, duration: 0.84, ease: "power2.out" }, 0.48);
-        },
-        { start: revealStart, loops: musicLoops }
-      );
+      if (isIOS) {
+        gsapLib.set(musicCard, { autoAlpha: 1, y: 0, scale: 1, clearProps: "opacity,visibility,transform" });
+        gsapLib.set(musicCard?.querySelectorAll(".visualizer span"), {
+          autoAlpha: 1,
+          clearProps: "opacity,visibility",
+        });
+        musicLoops.forEach((loop) => loop.play());
+      } else {
+        createScrollTimeline(
+          musicCard,
+          (timeline) => {
+            const q = gsapLib.utils.selector(musicCard);
+            timeline
+              .from(q(".motion-glow"), {
+                autoAlpha: 0,
+                scale: 0.84,
+                duration: 0.94,
+                ease: "sine.out",
+              }, 0.04)
+              .from(musicCard, {
+                autoAlpha: 0,
+                y: enterDistance,
+                scale: 0.985,
+                duration: 1.26,
+                ease: "power2.out",
+              })
+              .from(q(".music-card__head h3"), {
+                autoAlpha: 0,
+                x: -10,
+                duration: 0.84,
+                ease: "power2.out",
+              }, 0.24)
+              .from(q(".visualizer span"), {
+                autoAlpha: 0,
+                scaleY: 0.4,
+                stagger: 0.06,
+                duration: 0.44,
+                transformOrigin: "50% 100%",
+                ease: "sine.out",
+              }, 0.34)
+              .from(q(".music-copy"), { autoAlpha: 0, y: 10, duration: 0.84, ease: "power2.out" }, 0.48);
+          },
+          { start: revealStart, loops: musicLoops }
+        );
+      }
 
       const galleryLoops = [
         createFloatTween(galleryCard?.querySelector(".gallery-feature-frame"), {
@@ -1802,40 +1827,46 @@ function setupGsapAnimations() {
         }),
       ].filter(Boolean);
 
-      createScrollTimeline(
-        promiseSection,
-        (timeline) => {
-          const q = gsapLib.utils.selector(promiseSection);
-          timeline
-            .from(promiseSection, {
-              autoAlpha: 0,
-              y: enterDistance,
-              duration: 1.18,
-              ease: "power2.out",
-            })
-            .from(q(".motion-glow"), {
-              autoAlpha: 0,
-              scale: 0.84,
-              duration: 0.92,
-              ease: "sine.out",
-            }, 0.08)
-            .from(q(".promise-card"), {
-              autoAlpha: 0,
-              y: 12,
-              scale: 0.99,
-              duration: 0.94,
-              ease: "power2.out",
-            }, 0.22)
-            .from(q(".promise-card > *:not(.card-rain):not(.motion-glow)"), {
-              autoAlpha: 0,
-              y: 8,
-              stagger: 0.14,
-              duration: 0.82,
-              ease: "power2.out",
-            }, 0.42);
-        },
-        { start: revealStart, loops: promiseLoops }
-      );
+      if (isIOS) {
+        gsapLib.set(promiseSection, { autoAlpha: 1, y: 0, clearProps: "opacity,visibility,transform" });
+        gsapLib.set(promiseCard, { autoAlpha: 1, y: 0, scale: 1, clearProps: "opacity,visibility,transform" });
+        promiseLoops.forEach((loop) => loop.play());
+      } else {
+        createScrollTimeline(
+          promiseSection,
+          (timeline) => {
+            const q = gsapLib.utils.selector(promiseSection);
+            timeline
+              .from(promiseSection, {
+                autoAlpha: 0,
+                y: enterDistance,
+                duration: 1.18,
+                ease: "power2.out",
+              })
+              .from(q(".motion-glow"), {
+                autoAlpha: 0,
+                scale: 0.84,
+                duration: 0.92,
+                ease: "sine.out",
+              }, 0.08)
+              .from(q(".promise-card"), {
+                autoAlpha: 0,
+                y: 12,
+                scale: 0.99,
+                duration: 0.94,
+                ease: "power2.out",
+              }, 0.22)
+              .from(q(".promise-card > *:not(.card-rain):not(.motion-glow)"), {
+                autoAlpha: 0,
+                y: 8,
+                stagger: 0.14,
+                duration: 0.82,
+                ease: "power2.out",
+              }, 0.42);
+          },
+          { start: revealStart, loops: promiseLoops }
+        );
+      }
 
       const footerLoops = [
         createGlowTween(footer?.querySelector(".motion-glow"), {
@@ -1850,7 +1881,7 @@ function setupGsapAnimations() {
           repeatDelay: mobile ? 6.8 : 7.8,
           opacity: mobile ? 0.46 : 0.56,
         }),
-        footer?.querySelector("p")
+        !isIOS && footer?.querySelector("p")
           ? gsapLib.to(footer.querySelector("p"), {
               y: mobile ? -1.5 : -2.5,
               duration: mobile ? 4.8 : 5.6,
@@ -1862,39 +1893,44 @@ function setupGsapAnimations() {
           : null,
       ].filter(Boolean);
 
-      createScrollTimeline(
-        footer,
-        (timeline) => {
-          const q = gsapLib.utils.selector(footer);
-          timeline
-            .from(footer, {
-              autoAlpha: 0,
-              y: mobile ? 16 : 20,
-              duration: 0.92,
-              ease: "power2.out",
-            })
-            .from(q(".motion-glow"), {
-              autoAlpha: 0,
-              scale: 0.82,
-              duration: 0.9,
-              ease: "sine.out",
-            }, 0.06)
-            .from(q(".light-sweep"), {
-              autoAlpha: 0,
-              duration: 0.84,
-              ease: "sine.out",
-            }, 0.12)
-            .from(q("p"), {
-              autoAlpha: 0,
-              y: mobile ? 14 : 18,
-              scale: 0.96,
-              filter: "blur(8px)",
-              duration: 1.06,
-              ease: "power2.out",
-            }, 0.18);
-        },
-        { start: revealStart, loops: footerLoops }
-      );
+      if (isIOS) {
+        gsapLib.set(footer, { autoAlpha: 1, y: 0, clearProps: "opacity,visibility,transform" });
+        footerLoops.forEach((loop) => loop.play());
+      } else {
+        createScrollTimeline(
+          footer,
+          (timeline) => {
+            const q = gsapLib.utils.selector(footer);
+            timeline
+              .from(footer, {
+                autoAlpha: 0,
+                y: mobile ? 16 : 20,
+                duration: 0.92,
+                ease: "power2.out",
+              })
+              .from(q(".motion-glow"), {
+                autoAlpha: 0,
+                scale: 0.82,
+                duration: 0.9,
+                ease: "sine.out",
+              }, 0.06)
+              .from(q(".light-sweep"), {
+                autoAlpha: 0,
+                duration: 0.84,
+                ease: "sine.out",
+              }, 0.12)
+              .from(q("p"), {
+                autoAlpha: 0,
+                y: mobile ? 14 : 18,
+                scale: 0.96,
+                filter: "blur(8px)",
+                duration: 1.06,
+                ease: "power2.out",
+              }, 0.18);
+          },
+          { start: revealStart, loops: footerLoops }
+        );
+      }
 
       scrollTriggerLib.refresh();
 

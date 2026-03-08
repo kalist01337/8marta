@@ -2665,16 +2665,30 @@ body.is-ios .letter {
   contain: paint;
 }
 
-body.is-ios .signature-card__content,
-body.is-ios .mini-card > *,
-body.is-ios .gallery-note-card > *,
-body.is-ios .letter-shell > *,
-body.is-ios .letter > *,
-body.is-ios .promise-card > * {
+body.is-ios .signature-portrait,
+body.is-ios .signature-memory,
+body.is-ios .gallery-side-shot,
+body.is-ios .gallery-feature-frame {
   -webkit-transform: translateZ(0);
   transform: translateZ(0);
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
+}
+
+body.is-ios .quote-card .eyebrow,
+body.is-ios .quote-card h2,
+body.is-ios .quote-copy,
+body.is-ios .card-note,
+body.is-ios .music-card__head h3,
+body.is-ios .music-copy,
+body.is-ios .promise-card h2,
+body.is-ios .promise-copy,
+body.is-ios .footer p {
+  animation: none !important;
+  transition: none !important;
+  transform: none !important;
+  filter: none !important;
+  will-change: auto !important;
 }
 
 body.is-ios .motion-glow,
