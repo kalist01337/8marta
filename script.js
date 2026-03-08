@@ -1141,6 +1141,7 @@ function setupGsapAnimations() {
             ".intro-card h1",
             ".intro-copy",
             ".intro-button",
+            ".chip",
             ".gallery-copy",
             ".gallery-whisper",
             ".gallery-note-copy",
@@ -1358,8 +1359,10 @@ function setupGsapAnimations() {
             ease: "power2.out",
           },
           0.34
-        )
-        .from(
+        );
+
+      if (!isIOS) {
+        heroTimeline.from(
           ".chip",
           {
             autoAlpha: 0,
@@ -1370,8 +1373,10 @@ function setupGsapAnimations() {
             ease: "power2.out",
           },
           0.9
-        )
-        .from(
+        );
+      }
+
+      heroTimeline.from(
           ".signature-line",
           {
             autoAlpha: 0,
