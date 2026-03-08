@@ -2665,6 +2665,18 @@ body.is-ios .letter {
   contain: paint;
 }
 
+body.is-ios .signature-card__content,
+body.is-ios .mini-card > *,
+body.is-ios .gallery-note-card > *,
+body.is-ios .letter-shell > *,
+body.is-ios .letter > *,
+body.is-ios .promise-card > * {
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
 body.is-ios .motion-glow,
 body.is-ios .light-sweep,
 body.is-ios .signature-card__shine,

@@ -767,7 +767,7 @@ function setupBackgroundBreathing(mobile) {
 }
 
 function setupHeroParallax(mobile) {
-  if (!hasGsap || reducedMotion || isIOS) {
+  if (!hasGsap || reducedMotion) {
     return;
   }
 
@@ -805,7 +805,7 @@ function setupHeroParallax(mobile) {
     });
   }
 
-  if (heroContent) {
+  if (heroContent && !isIOS) {
     gsapLib.to(heroContent, {
       yPercent: mobile ? -2 : -5,
       ease: "none",
@@ -831,7 +831,7 @@ function setupHeroParallax(mobile) {
     });
   }
 
-  if (shine) {
+  if (shine && !isIOS) {
     gsapLib.to(shine, {
       xPercent: mobile ? 10 : 16,
       yPercent: mobile ? -3 : -6,
@@ -842,7 +842,7 @@ function setupHeroParallax(mobile) {
 }
 
 function setupPhotoScrollMotion(mobile) {
-  if (!hasGsap || reducedMotion || isIOS) {
+  if (!hasGsap || reducedMotion) {
     return;
   }
 
@@ -903,7 +903,7 @@ function setupPhotoScrollMotion(mobile) {
 }
 
 function setupGalleryDepthMotion(mobile) {
-  if (!hasGsap || reducedMotion || isIOS) {
+  if (!hasGsap || reducedMotion) {
     return;
   }
 
@@ -927,7 +927,7 @@ function setupGalleryDepthMotion(mobile) {
     scrub: mobile ? 1.05 : 1.2,
   };
 
-  if (mainNote) {
+  if (mainNote && !isIOS) {
     gsapLib.to(mainNote, {
       yPercent: mobile ? -2 : -4,
       rotation: mobile ? -0.35 : -0.8,
@@ -936,7 +936,7 @@ function setupGalleryDepthMotion(mobile) {
     });
   }
 
-  if (closingNote) {
+  if (closingNote && !isIOS) {
     gsapLib.to(closingNote, {
       yPercent: mobile ? 2 : 4,
       rotation: mobile ? 0.35 : 0.75,
